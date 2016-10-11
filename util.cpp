@@ -8,6 +8,13 @@ int hexToInt(char a)
 		return a-'a'+10;
 }
 
+char intToHex(int a)
+{
+	if(a<0 || 15<a)
+		return '\0';
+	return hex[a];
+}
+
 int hexToBase64(char *encoded, const char *string, int len)
 {
 	int i=0;	
