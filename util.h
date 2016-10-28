@@ -2,5 +2,5 @@ static const char base_64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvw
 static const char hex[] = "0123456789abcdef";
 
 int hexToInt(char a);
-char intToHex(int a);
 int hexToBase64(char *encoded, const char *string, int len);
+int oneByteXor(char *out, const char *string, int len, const char key);

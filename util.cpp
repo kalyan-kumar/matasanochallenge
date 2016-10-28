@@ -8,16 +8,9 @@ int hexToInt(char a)
 		return a-'a'+10;
 }
 
-char intToHex(int a)
-{
-	if(a<0 || 15<a)
-		return '\0';
-	return hex[a];
-}
-
 int hexToBase64(char *encoded, const char *string, int len)
 {
-	int i=0;	
+	int i = 0;	
 	char *p;
 	
 	p = encoded;
@@ -42,4 +35,25 @@ int hexToBase64(char *encoded, const char *string, int len)
 	*p++ = '\0';
 
 	return p-encoded;
+}
+
+int oneByteXor(char *out, const char *string, int len, const char key)
+{
+	int i = 0;
+	char *p = out;
+
+	if(len%2==1)
+	{
+		*p++ = hex[(key & 0xf)^hexToInt(string[0])];
+		i=1;
+	}
+
+	for(;i<len;i+=2)
+	{
+		*p++ = hex[((key >> 4) & 0xf)^hexToInt(string[i])];
+		*p++ = hex[(key & 0xf)^hexToInt(string[i+1])];
+	}
+	*p++ = '\0';
+
+	return p-out;
 }
